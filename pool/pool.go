@@ -32,8 +32,8 @@ func NewPool(network, addr string, size int) (*Pool, error) {
 	return &p, nil
 }
 
-// Retrieves an available redis client. If there none available it will create a
-// new one on the fly
+// Retrieves an available redis client. If there are none available it will
+// create a new one on the fly
 func (p *Pool) Get() (*redis.Client, error) {
 	select {
 	case conn := <-p.pool:
