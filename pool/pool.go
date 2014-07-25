@@ -49,7 +49,7 @@ func (p *Pool) Get() (*redis.Client, error) {
 // more connections as needed.
 func (p *Pool) Put(conn *redis.Client) {
 	select {
-	case p.pool<- conn:
+	case p.pool <- conn:
 	default:
 		conn.Close()
 	}

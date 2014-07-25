@@ -1,8 +1,8 @@
 package pool
 
 import (
-	. "testing"
 	"github.com/fzzy/radix/redis"
+	. "testing"
 )
 
 func TestPool(t *T) {
