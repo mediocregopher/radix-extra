@@ -44,7 +44,9 @@ func (p *Pool) Get() (*redis.Client, error) {
 }
 
 // Returns a client back to the pool. If the pool is full the client is closed
-// instead
+// instead. If the client is already closed (due to connection failure or
+// what-have-you) it should not be put back in the pool. The pool will create
+// more connections as needed.
 func (p *Pool) Put(conn *redis.Client) {
 	select {
 	case p.pool<- conn:
