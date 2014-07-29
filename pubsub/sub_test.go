@@ -18,7 +18,7 @@ func TestSubscribe(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	sub := &SubClient{client}
+	sub := NewSubClient(client)
 
 	channel := "subTestChannel"
 	message := "Hello, World!"
