@@ -78,10 +78,10 @@ func (p *Pool) Empty() {
 	var conn *redis.Client
 	for {
 		select {
-			case conn = <-p.pool:
-				conn.Close()
-			default:
-				return
+		case conn = <-p.pool:
+			conn.Close()
+		default:
+			return
 		}
 	}
 }

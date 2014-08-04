@@ -26,7 +26,7 @@ import (
 // An error wrapper returned by operations in this package. It implements the
 // error interface and can therefore be passed around as a normal error.
 type ClientError struct {
-	err         error
+	err error
 
 	// If this is true the error is due to a problem with the sentinel
 	// connection, either it being closed or otherwise unavailable. If false the
@@ -45,7 +45,7 @@ type getReqRet struct {
 }
 
 type getReq struct {
-	name string
+	name  string
 	retCh chan *getReqRet
 }
 
