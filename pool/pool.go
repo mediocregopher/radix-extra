@@ -32,6 +32,22 @@ func NewPool(network, addr string, size int) (*Pool, error) {
 	return &p, nil
 }
 
+// Calls NewPool, but if there is an error it return a pool of the same size but
+// without any connections pre-initialized (can be used the same way, but if
+// this happens there might be something wrong with the redis instance you're
+// connecting to)
+func NewOrEmptyPool(network, addr string, size int) *Pool {
+	pool, err := NewPool(network, addr, size)
+	if err != nil {
+		pool = &Pool{
+			network: network,
+			addr:    addr,
+			pool:    make(chan *redis.Client, size),
+		}
+	}
+	return pool
+}
+
 // Retrieves an available redis client. If there are none available it will
 // create a new one on the fly
 func (p *Pool) Get() (*redis.Client, error) {
