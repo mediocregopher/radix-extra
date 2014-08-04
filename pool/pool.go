@@ -54,3 +54,18 @@ func (p *Pool) Put(conn *redis.Client) {
 		conn.Close()
 	}
 }
+
+// Removes and calls Close() on all the connections currently in the pool.
+// Assuming there are no other connections waiting to be Put back this method
+// effectively closes and cleans up the pool.
+func (p *Pool) Empty() {
+	var conn *redis.Client
+	for {
+		select {
+			case conn = <-p.pool:
+				conn.Close()
+			default:
+				return
+		}
+	}
+}

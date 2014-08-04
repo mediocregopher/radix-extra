@@ -21,4 +21,6 @@ func TestPool(t *T) {
 	for i := range conns {
 		pool.Put(conns[i])
 	}
+
+	pool.Empty()
 }
