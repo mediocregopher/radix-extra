@@ -194,8 +194,6 @@ func (c *Client) spin() {
 			c.subClient.Client.Close()
 			close(c.getCh)
 			close(c.putCh)
-			close(c.alwaysErrCh)
-			close(c.switchMasterCh)
 			return
 		}
 	}
