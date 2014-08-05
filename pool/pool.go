@@ -29,6 +29,9 @@ func NewPool(network, addr string, size int) (*Pool, error) {
 		addr:    addr,
 		pool:    make(chan *redis.Client, len(pool)),
 	}
+	for i := range pool {
+		p.pool <- pool[i]
+	}
 	return &p, nil
 }
 
