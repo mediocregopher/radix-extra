@@ -40,7 +40,7 @@ func (r *SubReply) Timeout() bool {
 		return false
 	}
 	t, ok := r.Err.(*net.OpError)
-	return !ok || t.Timeout()
+	return ok && t.Timeout()
 }
 
 func NewSubClient(client *redis.Client) *SubClient {
